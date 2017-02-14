@@ -226,7 +226,28 @@ class LeadController extends React.Component {
       });
     })
     .then(() => {
-          
+      new Promise((resolve, reject) => {
+
+        $.ajax({
+          url: 'http://localhost:8080/leads/store',
+          type: 'post',
+          data: {
+            nome: this.$nameText.val(),
+            email: this.$emailText.val(),
+            telefone: this.$telefoneText.val(),
+            regiao: this.$regionText.val(),
+            data_nascimento: DateFormat(new Date(this.$nascimentoText.val()), 'isoDate'),
+            score: points
+          }
+        })
+        .done(data => {
+          resolve(data);
+        })
+        .fail(err => {
+          reject(err);
+        });
+      });
+
     });
 
   }

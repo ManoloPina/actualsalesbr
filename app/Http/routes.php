@@ -15,6 +15,8 @@ Route::get('/', 'LeadController@index');
 
 Route::get('home', 'HomeController@index');
 
+Route::post('leads/store', 'LeadController@store');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

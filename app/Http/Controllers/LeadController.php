@@ -2,11 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Leads;
+
 
 use Illuminate\Http\Request;
 
 class LeadController extends Controller {
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -25,7 +26,7 @@ class LeadController extends Controller {
 	 */
 	public function create()
 	{
-		//
+
 	}
 
 	/**
@@ -35,7 +36,21 @@ class LeadController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		try {
+			$leads = Leads::create([
+				'nome' => $request->nome,
+				'email' => $request->email,
+				'telefone' => $request->telefone,
+				'regiao' => $request->regiao,
+				'data_nascimento' => $request->data_nascimento,
+				'score' => $request->score
+			]);
+
+			return response()->json($leads);
+
+		}catch(\Exception $e) {
+			return response()->json($e);
+		}
 	}
 
 	/**
